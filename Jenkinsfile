@@ -1,10 +1,6 @@
 pipeline {
     agent any
  
-   tools
-    {
-       maven "Maven"
-    }
    stages {
       stage('checkout') {
            steps {
@@ -13,13 +9,13 @@ pipeline {
              
           }
         }
-    stage('Execute Maven') {
+     stage('Execute Maven') {
            steps {
              
                 sh 'mvn package'             
           }
         }
-    stage('Docker Build and Tag') {
+     stage('Docker Build and Tag') {
            steps {
               
                 sh 'docker build -t samplecicd:latest .' 
@@ -29,7 +25,7 @@ pipeline {
           }
         }
      
-    stage('Publish image to Docker Hub') {
+      stage('Publish image to Docker Hub') {
           
             steps {
         withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
