@@ -2,22 +2,10 @@ pipeline {
     agent any
  
    stages {
-      stage('checkout') {
-           steps {
-             
-                git branch: 'master', url: 'https://github.com/karunadm/hello-world-war.git'
-             
-          }
-        }
-     stage('Execute Maven') {
-           steps {
-             
-                sh 'mvn package'             
-          }
-        }
-     stage('Docker Build and Tag') {
+      stage('Docker Build and Tag') {
            steps {
               
+                sh 'cd /home/ubuntu/hello-world-war'
                 sh 'docker build -t samplecicd:latest .' 
                 sh 'docker tag samplecicd dmkaruna/testkrepo:latest'
                 //sh 'docker tag samplewebapp nikhilnidhi/samplewebapp:$BUILD_NUMBER'
